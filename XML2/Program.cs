@@ -18,46 +18,45 @@ namespace XML2
 
             XmlElement root = doc.CreateElement("RootElement");
             XmlElement firstElement = doc.CreateElement("First");
-            root.AppendChild(firstElement);
+            firstElement.SetAttribute("Comment", "Some Comment of Element");
+            firstElement.InnerText = "\nFirst element inner text"; //почему-то при установке текста всё становится в одну строку. Не знаю как победить. Без внутреннего текста всё красиво.
+
+
+
             XmlElement secondElement = doc.CreateElement("Second");
-            firstElement.AppendChild(secondElement);
+            secondElement.SetAttribute("Comment", "Some Comment of Element");
+            
+            
+
             XmlElement thirdElement = doc.CreateElement("Third");
             secondElement.AppendChild(thirdElement);
             XmlElement fourthElement = doc.CreateElement("Forth");
+            fourthElement.InnerText = "\nFourth element inner text";
             thirdElement.AppendChild(fourthElement);
+            XmlElement emptyElement = doc.CreateElement("Empty");
+            emptyElement.SetAttribute("Comment", "Some Comment of Element");
+            emptyElement.InnerText= "\nEmptyElemInnerText\n";
+          
+            XmlNode emp1 = emptyElement.Clone();
+            XmlNode emp2 = emptyElement.Clone();
+            XmlNode emp3 = emptyElement.Clone();
+            XmlNode emp4 = emptyElement.Clone();
+            XmlNode emp5 = emptyElement.Clone();
+            XmlNode emp6 = emptyElement.Clone();
+            root.AppendChild(firstElement);
+            firstElement.AppendChild(secondElement);
+            root.AppendChild(emptyElement);
+            root.AppendChild(emp1);
+            root.AppendChild(emp2);
+            root.AppendChild(emp3);
+            root.AppendChild(emp4);
+            root.AppendChild(emp5);
+            root.AppendChild(emp6);
+
+
+
             doc.AppendChild(root);
             doc.Save("Elements.xml");
-
-            //for (int i = 0; i < pInfo.Length; i++)
-            //    {
-            //        if (i == 0)
-            //        {
-            //            XmlElement orderAttr = doc.CreateElement(pInfo[i].Name);
-            //            orderAttr.InnerText = order.GetType().GetProperty(pInfo[i].Name).GetValue(order, null).ToString();
-            //            orderElement.SetAttribute(pInfo[i].Name, order.GetType().GetProperty(pInfo[i].Name).GetValue(order, null).ToString());
-            //        }
-            //        else
-            //        {
-            //            XmlElement otherElement = null;
-            //            try
-            //            {
-            //                otherElement = doc.CreateElement(pInfo[i].Name);
-            //                otherElement.InnerText = order.GetType().GetProperty(pInfo[i].Name).GetValue(order, null).ToString();
-            //            }
-            //            catch (NullReferenceException)
-            //            {
-            //                otherElement = doc.CreateElement(pInfo[i].Name);
-            //            }
-            //            finally
-            //            {
-            //                orderElement.AppendChild(otherElement);
-            //            }
-            //        }
-            //    }
-            //    root.AppendChild(orderElement);
-            //}
-            //doc.AppendChild(root);
-            //doc.Save("Orders.xml");
         }
     }
 }
